@@ -14,6 +14,7 @@ namespace UdemyNLayerProject.Core.Models
         public bool IsDeleted { get; set; }
         public string InnerBarkod { get; set; }
         public virtual Category Category{ get; set; }  
-        // Category classına referans veriyoruz. entity Category sınıfının üzerinden inherit kullanarak değişiklikleri izlemesi için "virtual" kullandık.
+        // Category classına referans veriyoruz. 
+        //entity Category sınıfının üzerinden inherit kullanarak değişiklikleri izlemesi için "virtual" kullandık.
     }
 }
