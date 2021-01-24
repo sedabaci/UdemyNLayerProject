@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace UdemyNLayerProject.Core.Models
+﻿namespace UdemyNLayerProject.Core.Models
 {
     public class Product
     {
