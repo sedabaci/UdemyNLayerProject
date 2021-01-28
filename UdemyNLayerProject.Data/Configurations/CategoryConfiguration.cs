@@ -9,6 +9,9 @@ namespace UdemyNLayerProject.Data.Configurations
 {
     public class CategoryConfiguration : IEntityTypeConfiguration<Category>
     {
+        /// <summary>
+        /// tablonun çalışma şekli
+        /// </summary>
         public void Configure(EntityTypeBuilder<Category> builder)
         {
             builder.HasKey(x => x.Id); //PK

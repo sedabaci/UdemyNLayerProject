@@ -9,6 +9,9 @@ namespace UdemyNLayerProject.Data.Configurations
 {
     public class ProductConfiguration : IEntityTypeConfiguration<Product>
     {
+        /// <summary>
+        /// tablonun çalışma şekli
+        /// </summary>
         public void Configure(EntityTypeBuilder<Product> builder)
         {
             builder.HasKey(x => x.Id);  //PK.
