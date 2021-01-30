@@ -8,13 +8,13 @@ using UdemyNLayerProject.Core.Repositories;
 
 namespace UdemyNLayerProject.Data.Repositories
 {
-    class CategoryRepository : Repository<Category>, ICategoryRepository
+    public class CategoryRepository : Repository<Category>, ICategoryRepository
     {
         /// <summary>
         /// repositoryden gelen _context i AppDbContext'e convert ettik
         /// </summary>
         AppDbContext _appDbContext { get => _context as AppDbContext; }
-        
+
         public CategoryRepository(DbContext context) : base(context)
         {
         }
