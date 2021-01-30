@@ -11,7 +11,7 @@ namespace UdemyNLayerProject.Data.Seeds
     {
         /// <summary>
         /// DB'de tablolar olusturulurken, tablolara default data tanımlanması islemi / </summary>
-        /// 
+        
         private readonly int[] _ids;
         public CategorySeed(int[] ids)
         {
