@@ -25,9 +25,11 @@ namespace UdemyNLayerProject.API
             // Servislerimi eklediğim method.
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseSqlServer(Configuration["ConnectionStrings: SqlConStr"].ToString());
+                options.UseSqlServer(Configuration["ConnectionStrings:SqlConStr"].ToString(), o =>
+                {
+                    o.MigrationsAssembly("UdemyNLayerProject.Data");
+                });
             });
-
 
             /// <summary>
             /// Dependency injecktion
