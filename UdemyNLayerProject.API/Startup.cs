@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using UdemyNLayerProject.API.DTOS;
+using UdemyNLayerProject.Core.Models;
 using UdemyNLayerProject.Core.Repositories;
 using UdemyNLayerProject.Core.Services;
 using UdemyNLayerProject.Core.UnitOfWorks;
@@ -33,6 +35,8 @@ namespace UdemyNLayerProject.API
             /// eğer AddTransient kullansaydık her seferinde yeni bir nesne örneği alırdı.
             /// </summary>
 
+
+            services.AddAutoMapper(typeof(Startup));                                       //Entityleri DTO'lara dönüştürür
             services.AddScoped(typeof(IRepository<>),typeof(Repository<>));                //IRepository ile karsılasırsan Repository classından nesne örneği al IRepository'e ata
             services.AddScoped(typeof(IService<>), typeof(Service.Services.Service<>));    //IService ile karsılasırsan Service classından nesne örneği al IService'e ata
             services.AddScoped<ICategoryService, CategoryServices>();                      //ICategoryService ile karsılasırsan CategoryServices classından nesne örneği al ICategoryService'e ata
