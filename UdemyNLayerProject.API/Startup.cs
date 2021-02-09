@@ -4,9 +4,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using UdemyNLayerProject.Core.Repositories;
+using UdemyNLayerProject.Core.Services;
 using UdemyNLayerProject.Core.UnitOfWorks;
 using UdemyNLayerProject.Data;
+using UdemyNLayerProject.Data.Repositories;
 using UdemyNLayerProject.Data.UnitOfWorks;
+using UdemyNLayerProject.Service.Services;
 
 namespace UdemyNLayerProject.API
 {
@@ -20,9 +24,21 @@ namespace UdemyNLayerProject.API
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services) // Servislerimi eklediğim method.
         {
-            // Servislerimi eklediğim method.
+            /// <summary>
+            /// Dependency injecktion
+            /// Bir request esnasında classın ctorunda interface ile karsılasırsa, gidip ilgili class'tan nesne örneği al.
+            /// eğer birden fazla IUnitOfWork ile karsılasırsa aynı nesne örneği ile devam eder(AddScoped).
+            /// eğer AddTransient kullansaydık her seferinde yeni bir nesne örneği alırdı.
+            /// </summary>
+
+            services.AddScoped(typeof(IRepository<>),typeof(Repository<>));                //IRepository ile karsılasırsan Repository classından nesne örneği al IRepository'e ata
+            services.AddScoped(typeof(IService<>), typeof(Service.Services.Service<>));    //IService ile karsılasırsan Service classından nesne örneği al IService'e ata
+            services.AddScoped<ICategoryService, CategoryServices>();                      //ICategoryService ile karsılasırsan CategoryServices classından nesne örneği al ICategoryService'e ata
+            services.AddScoped<IProductService, ProductServices>();                        //IProductService ile karsılasırsan ProductServices classından nesne örneği al IProductService'e ata
+            services.AddScoped<IUnitOfWork, UnitOfWork>();                                 //IUnitOfWork ile karsılasırsan UnitOfWork classından nesne örneği al IUnitOfWork'e ata
+
             services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseSqlServer(Configuration["ConnectionStrings:SqlConStr"].ToString(), o =>
@@ -30,14 +46,6 @@ namespace UdemyNLayerProject.API
                     o.MigrationsAssembly("UdemyNLayerProject.Data");
                 });
             });
-
-            /// <summary>
-            /// Dependency injecktion
-            /// Bir request esnasında classın ctorunda IUnitOfWork ile karsılasırsa, gidip UnitOfWork'ten nesne örneği al. 
-            /// eğer birden fazla IUnitOfWork ile karsılasırsa aynı nesne örneği ile devam eder(AddScoped).
-            /// eğer AddTransient kullansaydık her seferinde yeni bir nesne örneği alırdı.
-            /// </summary>
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddControllers();
         }
