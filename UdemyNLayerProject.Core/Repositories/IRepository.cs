@@ -13,7 +13,7 @@ namespace UdemyNLayerProject.Core.Repositories
         Task<TEntity> GetByIdAsync(int id);
         Task<IEnumerable<TEntity>> GetAllAsync();
         //herhangi parametreye göre ilgili nesneleri bul
-        IEnumerable<TEntity> Where(Expression<Func<TEntity, bool>> predicate);
+        Task <IEnumerable<TEntity>> Where(Expression<Func<TEntity, bool>> predicate);
         //herhangi bir nesnesine göre getir
         Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate);
         Task AddAsync(TEntity entity);

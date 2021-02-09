@@ -10,7 +10,7 @@ namespace UdemyNLayerProject.Core.UnitOfWorks
     {
         /// <summary>
         /// nesnelerin DB'ye yansımasını sağlar
-        /// Repositorylerimin referanslarını burada vermem, best practice için uygun
+        /// Repositorylerin referanslarını burada vermek, best practice için uygun
         /// </summary>
         IProductRepository Products { get; }
         ICategoryRepository Categories { get; }

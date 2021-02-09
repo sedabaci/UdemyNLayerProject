@@ -11,7 +11,7 @@ namespace UdemyNLayerProject.Data.Repositories
         /// repositoryden gelen _context i AppDbContext'e convert ettik
         /// </summary>
         private AppDbContext _appDbContext { get => _context as AppDbContext; }
-        public ProductRepository(DbContext context) : base(context)
+        public ProductRepository(AppDbContext context) : base(context)
         {
         }
         public async Task<Product> GetWithCategoryByIdAsync(int productId)

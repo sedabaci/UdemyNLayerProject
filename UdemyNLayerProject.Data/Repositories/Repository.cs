@@ -19,7 +19,7 @@ namespace UdemyNLayerProject.Data.Repositories
         protected readonly DbContext _context;
         private readonly DbSet<TEntity> _dbSet;
 
-        public Repository(DbContext context)
+        public Repository(AppDbContext context)
         {
             _context = context;              // database'e erişiyorum
             _dbSet = context.Set<TEntity>(); // tablolara erişiyorum
@@ -32,9 +32,9 @@ namespace UdemyNLayerProject.Data.Repositories
         {
             await _dbSet.AddRangeAsync(entities);
         }
-        public IEnumerable<TEntity> Where(Expression<Func<TEntity, bool>> predicate)
+        public async Task<IEnumerable<TEntity>> Where(Expression<Func<TEntity, bool>> predicate)
         {
-            return _dbSet.Where(predicate);
+            return await _dbSet.Where(predicate).ToListAsync();
         }
         public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
@@ -63,7 +63,7 @@ namespace UdemyNLayerProject.Data.Repositories
             /// cok sütunlu tablolar için ideal kullanım.
             /// entityde tek bir alan değiştirirsek, DB'de tüm alanı upd edecek sorgu gönderir(dezavantaj)
             /// </summary>   
-            
+
             _context.Entry(entity).State = EntityState.Modified;
             return entity;
         }
