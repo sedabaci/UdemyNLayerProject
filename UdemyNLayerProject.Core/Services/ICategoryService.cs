@@ -8,7 +8,7 @@ namespace UdemyNLayerProject.Core.Services
 {
     public interface ICategoryService : IService<Category>
     {
-        //Category özgü methodları burada tanımlayabilirsiniz.
+        //Categorye özgü methodları burada tanımlıyoruz.
         Task<Category> GetWithProductsByIdAsync(int categoryId);
     }
 }
