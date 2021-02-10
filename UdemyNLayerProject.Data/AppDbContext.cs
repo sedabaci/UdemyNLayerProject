@@ -16,6 +16,7 @@ namespace UdemyNLayerProject.Data
         }
         public DbSet<Category> Categories { get; set; }   //isimlendirmenin çoğul olması BP.
         public DbSet<Product> Products { get; set; }
+        public DbSet<Person> Persons { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             /*  modelBuilder.Entity<Product>().Property(x => x.Id).UseIdentityColumn();
@@ -24,6 +25,7 @@ namespace UdemyNLayerProject.Data
             //önce DB'de tablolarım olusacak
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new PersonConfiguration());
 
             //daha sonra default datalar ilgili tablolara eklenecek
             modelBuilder.ApplyConfiguration(new CategorySeed(new int[] { 1, 2 }));
