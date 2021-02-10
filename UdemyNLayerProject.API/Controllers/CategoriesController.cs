@@ -17,11 +17,11 @@ namespace UdemyNLayerProject.API.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoryController : ControllerBase
+    public class CategoriesController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
         private readonly IMapper _mapper;
-        public CategoryController(ICategoryService categoryService, IMapper mapper)
+        public CategoriesController(ICategoryService categoryService, IMapper mapper)
         {
             _categoryService = categoryService;
             _mapper = mapper;
@@ -44,7 +44,7 @@ namespace UdemyNLayerProject.API.Controllers
         public async Task<IActionResult> GetWithProductsById(int id)
         {
             var category = await _categoryService.GetWithProductsByIdAsync(id);
-            return Ok(_mapper.Map<CategortWithProductDto>(category));
+            return Ok(_mapper.Map<CategoryWithProductDto>(category));
         }
 
         [HttpPost]
@@ -68,7 +68,5 @@ namespace UdemyNLayerProject.API.Controllers
             _categoryService.Remove(category);
             return NoContent(); // del için geriye bir sey dönmüyorum(204) ,best practice 
         }
-
-
     }
 }

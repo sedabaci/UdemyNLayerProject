@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace UdemyNLayerProject.API.DTOS
 {
-    public class CategortWithProductDto : CategoryDto
+    public class CategoryWithProductDto : CategoryDto
     {
         public IEnumerable<ProductDto> Products { get; set; }
     }
