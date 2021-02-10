@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using UdemyNLayerProject.API.Filters;
 using UdemyNLayerProject.Core.Repositories;
 using UdemyNLayerProject.Core.Services;
 using UdemyNLayerProject.Core.UnitOfWorks;
@@ -36,7 +37,8 @@ namespace UdemyNLayerProject.API
 
 
             services.AddAutoMapper(typeof(Startup));                                       //Entityleri DTO'lara dönüştürür
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));                //IRepository ile karsılasırsan Repository classından nesne örneği al IRepository'e ata
+            services.AddScoped<ProductNotFoundFilter>();                                          //Filter içnerisinde interface tanımlandığı için doğrudan önce buraya kaydettik.
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));               //IRepository ile karsılasırsan Repository classından nesne örneği al IRepository'e ata
             services.AddScoped(typeof(IService<>), typeof(Service.Services.Service<>));    //IService ile karsılasırsan Service classından nesne örneği al IService'e ata
             services.AddScoped<ICategoryService, CategoryServices>();                      //ICategoryService ile karsılasırsan CategoryServices classından nesne örneği al ICategoryService'e ata
             services.AddScoped<IProductService, ProductServices>();                        //IProductService ile karsılasırsan ProductServices classından nesne örneği al IProductService'e ata
@@ -50,7 +52,10 @@ namespace UdemyNLayerProject.API
                 });
             });
 
-            services.AddControllers();
+            services.AddControllers(O =>
+            {
+                O.Filters.Add(new ValidationFilter());  // tüm controllerların içerisinde çalışır
+            });
 
             services.Configure<ApiBehaviorOptions>(options =>
             {
