@@ -115,5 +115,12 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:UdemyNLayerProject.API.Extensions.UseCustomExceptionHandler.UseCustomException(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            IApplicationBuilder üzerine custom extension method yazdık, exceptionları global olarak ele almak için
+            Extension methodlar mutlaka static class ve static method olmalı
+            </summary>
+            <param name="app"></param>
+        </member>
     </members>
 </doc>
