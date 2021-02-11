@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>UdemyNLayerProject.API</name>
+    </assembly>
+    <members>
+        <member name="T:UdemyNLayerProject.API.Controllers.CategoriesController">
+            <summary>
+            action methodlar
+            HTTP Status 200:OK, 
+            HTTP Status 201:Created,
+            HTPP Status 204:NoContent,
+            </summary>
+        </member>
+        <member name="M:UdemyNLayerProject.API.Controllers.CategoriesController.GetAll">
+            <summary>
+            Get all categories
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:UdemyNLayerProject.API.Controllers.CategoriesController.GetById(System.Int32)">
+            <summary>
+            Get category by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UdemyNLayerProject.API.Controllers.CategoriesController.GetWithProductsById(System.Int32)">
+            <summary>
+            Get category by id with products
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UdemyNLayerProject.API.Controllers.CategoriesController.Save(UdemyNLayerProject.API.DTOS.CategoryDto)">
+            <summary>
+            Save a category
+            </summary>
+            <param name="categoryDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UdemyNLayerProject.API.Controllers.CategoriesController.Update(UdemyNLayerProject.API.DTOS.CategoryDto)">
+            <summary>
+            Update the category
+            </summary>
+            <param name="categoryDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UdemyNLayerProject.API.Controllers.CategoriesController.Remove(System.Int32)">
+            <summary>
+            Delete the category
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UdemyNLayerProject.API.Controllers.PersonsController.GetAll">
+            <summary>
+            Get all persons
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:UdemyNLayerProject.API.Controllers.PersonsController.Save(UdemyNLayerProject.API.DTOS.PersonDto)">
+            <summary>
+            Save a person
+            </summary>
+            <param name="personDto"></param>
+            <returns></returns>
+        </member>
+        <member name="T:UdemyNLayerProject.API.Controllers.ProductsController">
+            <summary>
+            action methodlar
+            HTTP Status 200:OK, 
+            HTTP Status 201:Created,
+            HTPP Status 204:NoContent,
+            </summary>
+        </member>
+        <member name="M:UdemyNLayerProject.API.Controllers.ProductsController.GetAll">
+            <summary>
+            Get all products
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:UdemyNLayerProject.API.Controllers.ProductsController.GetById(System.Int32)">
+            <summary>
+            Get product by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UdemyNLayerProject.API.Controllers.ProductsController.GetWithCategoryById(System.Int32)">
+            <summary>
+            Get products by id with categories
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UdemyNLayerProject.API.Controllers.ProductsController.Save(UdemyNLayerProject.API.DTOS.ProductDto)">
+            <summary>
+            Save a category
+            </summary>
+            <param name="productDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UdemyNLayerProject.API.Controllers.ProductsController.Update(UdemyNLayerProject.API.DTOS.ProductDto)">
+            <summary>
+            Update the products
+            </summary>
+            <param name="productDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UdemyNLayerProject.API.Controllers.ProductsController.Remove(System.Int32)">
+            <summary>
+            Delete the product
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

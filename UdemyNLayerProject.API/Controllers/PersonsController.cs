@@ -24,13 +24,22 @@ namespace UdemyNLayerProject.API.Controllers
             _personService = personService;
         }
 
+        /// <summary>
+        /// Get all persons
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var persons = await _personService.GetAllAsync();
             return Ok(_mapper.Map<IEnumerable<PersonDto>>(persons));
         }
-
+        
+        /// <summary>
+        /// Save a person
+        /// </summary>
+        /// <param name="personDto"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Save(PersonDto personDto)
         {

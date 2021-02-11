@@ -27,6 +27,10 @@ namespace UdemyNLayerProject.API.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Get all categories
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -34,33 +38,57 @@ namespace UdemyNLayerProject.API.Controllers
             return Ok(_mapper.Map<IEnumerable<CategoryDto>>(categories));
         }
 
+        /// <summary>
+        /// Get category by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             var category = await _categoryService.GetByIdAsync(id);
             return Ok(_mapper.Map<CategoryDto>(category));
         }
-        [HttpGet("{id}/products")] //ilgili categoryId ye bağlı productları da getir
+
+        /// <summary>
+        /// Get category by id with products
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}/products")]
         public async Task<IActionResult> GetWithProductsById(int id)
         {
             var category = await _categoryService.GetWithProductsByIdAsync(id);
             return Ok(_mapper.Map<CategoryWithProductDto>(category));
         }
 
+        /// <summary>
+        /// Save a category
+        /// </summary>
+        /// <param name="categoryDto"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Save(CategoryDto categoryDto)
         {
             var newCategory = await _categoryService.AddAsync(_mapper.Map<Category>(categoryDto)); //client'dan aldığımız categoryDto'yu Category'e dönüştürdük
             return Created(string.Empty, _mapper.Map<CategoryDto>(newCategory));
         }
-
+        /// <summary>
+        /// Update the category
+        /// </summary>
+        /// <param name="categoryDto"></param>
+        /// <returns></returns>
         [HttpPut]
         public IActionResult Update(CategoryDto categoryDto)
         {
             var updateCategory = _categoryService.Update(_mapper.Map<Category>(categoryDto));
             return NoContent(); // upd için geriye bir sey dönmüyorum(204) ,best practice 
         }
-
+        /// <summary>
+        /// Delete the category
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public IActionResult Remove(int id)
         {

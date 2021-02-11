@@ -37,12 +37,24 @@ namespace UdemyNLayerProject.API
 
 
             services.AddAutoMapper(typeof(Startup));                                       //Entityleri DTO'lara dönüştürür
-            services.AddScoped<ProductNotFoundFilter>();                                          //Filter içnerisinde interface tanımlandığı için doğrudan önce buraya kaydettik.
+            services.AddScoped<ProductNotFoundFilter>();                                   //Filter içnerisinde interface tanımlandığı için doğrudan önce buraya kaydettik.
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));               //IRepository ile karsılasırsan Repository classından nesne örneği al IRepository'e ata
             services.AddScoped(typeof(IService<>), typeof(Service.Services.Service<>));    //IService ile karsılasırsan Service classından nesne örneği al IService'e ata
             services.AddScoped<ICategoryService, CategoryServices>();                      //ICategoryService ile karsılasırsan CategoryServices classından nesne örneği al ICategoryService'e ata
             services.AddScoped<IProductService, ProductServices>();                        //IProductService ile karsılasırsan ProductServices classından nesne örneği al IProductService'e ata
             services.AddScoped<IUnitOfWork, UnitOfWork>();                                 //IUnitOfWork ile karsılasırsan UnitOfWork classından nesne örneği al IUnitOfWork'e ata
+            services.AddSwaggerDocument(config=> {                                          // Swaggger implemente edildi
+                config.PostProcess = (doc =>
+                {
+                    doc.Info.Title = "First API! | SB";
+                    doc.Info.Version = "1.0.13";
+                    doc.Info.Contact = new NSwag.OpenApiContact()
+                    {
+                        Name = "Seda Bacı",
+                        Email = "sedabacii@gmail.com"
+                    };
+                });
+            });                                                                           
 
             services.AddDbContext<AppDbContext>(options =>
             {
@@ -75,11 +87,12 @@ namespace UdemyNLayerProject.API
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseOpenApi();    // Swaggger implemente edildi
+            app.UseSwaggerUi3(); // Swaggger implemente edildi
 
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
