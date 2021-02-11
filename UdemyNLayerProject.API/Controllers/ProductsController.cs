@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UdemyNLayerProject.API.DTOS;
@@ -36,6 +37,7 @@ namespace UdemyNLayerProject.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
+            //throw new Exception("Tüm dataları çekerken bir hata meydana geldi!");
             return Ok(_mapper.Map<IEnumerable<ProductDto>>(await _productService.GetAllAsync()));
         }
 
@@ -74,6 +76,13 @@ namespace UdemyNLayerProject.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Save(ProductDto productDto)
         {
+            #region BestPracticeUygunDegil_SaveProductDto_olusturulabilir
+            if (string.IsNullOrEmpty(productDto.Id.ToString()) || productDto.Id <= 0)
+            {
+                throw new Exception("Id alanı gereklidir!");
+            }
+            #endregion BestPracticeUygunDegil_SaveProductDto_olusturulabilir
+
             var newProduct = await _productService.AddAsync(_mapper.Map<Product>(productDto));
             return Created(string.Empty, _mapper.Map<ProductDto>(newProduct));
         }

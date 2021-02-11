@@ -1,10 +1,14 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
+using UdemyNLayerProject.API.DTOS;
 using UdemyNLayerProject.API.Filters;
 using UdemyNLayerProject.Core.Repositories;
 using UdemyNLayerProject.Core.Services;
@@ -13,6 +17,7 @@ using UdemyNLayerProject.Data;
 using UdemyNLayerProject.Data.Repositories;
 using UdemyNLayerProject.Data.UnitOfWorks;
 using UdemyNLayerProject.Service.Services;
+using UdemyNLayerProject.API.Extensions;
 
 namespace UdemyNLayerProject.API
 {
@@ -47,7 +52,6 @@ namespace UdemyNLayerProject.API
                 config.PostProcess = (doc =>
                 {
                     doc.Info.Title = "First API! | SB";
-                    doc.Info.Version = "1.0.13";
                     doc.Info.Contact = new NSwag.OpenApiContact()
                     {
                         Name = "Seda Bacı",
@@ -86,6 +90,7 @@ namespace UdemyNLayerProject.API
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCustomException();       // Custom extension meyhod implemente edildi
             app.UseHttpsRedirection();
             app.UseRouting();
 
