@@ -11,7 +11,7 @@ namespace UdemyNLayerProject.Web.DTOS
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="{0} is Required!")]
         public string Name { get; set; }
     }
 }
