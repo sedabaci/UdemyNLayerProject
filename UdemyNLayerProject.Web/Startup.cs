@@ -25,6 +25,7 @@ namespace UdemyNLayerProject.Web
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped(typeof(ProductNotFoundFilter));                             //Filter içnerisinde interface tanımlandığı için(DI) önce buraya kaydettik.
             services.AddScoped(typeof(CategoryNotFoundFilter));                            //Filter içnerisinde interface tanımlandığı için(DI) önce buraya kaydettik.
             services.AddAutoMapper(typeof(Startup));                                       //Entityleri DTO'lara dönüştürür
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));               //IRepository ile karsılasırsan Repository classından nesne örneği al IRepository'e ata
