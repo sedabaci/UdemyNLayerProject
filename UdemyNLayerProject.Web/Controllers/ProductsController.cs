@@ -51,6 +51,11 @@ namespace UdemyNLayerProject.Web.Controllers
             return RedirectToAction("Index");
         }
 
-
+        public IActionResult Delete(int id)
+        {
+            var product = _productService.GetByIdAsync(id).Result;
+            _productService.Remove(product);
+            return RedirectToAction("Index");
+        }
     }
 }
