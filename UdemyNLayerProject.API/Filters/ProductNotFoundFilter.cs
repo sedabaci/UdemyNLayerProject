@@ -24,7 +24,7 @@ namespace UdemyNLayerProject.API.Filters
             var product = await _productService.GetByIdAsync(id);
 
             if (product != null)
-            {
+            { 
                 await next(); //product null değilse requesti devam ettirir
             }
             else
