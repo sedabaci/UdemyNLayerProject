@@ -11,6 +11,7 @@ using UdemyNLayerProject.Data;
 using UdemyNLayerProject.Data.Repositories;
 using UdemyNLayerProject.Data.UnitOfWorks;
 using UdemyNLayerProject.Service.Services;
+using UdemyNLayerProject.Web.Filters;
 
 namespace UdemyNLayerProject.Web
 {
@@ -22,10 +23,9 @@ namespace UdemyNLayerProject.Web
         }
 
         public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped(typeof(CategoryNotFoundFilter));                            //Filter içnerisinde interface tanımlandığı için(DI) önce buraya kaydettik.
             services.AddAutoMapper(typeof(Startup));                                       //Entityleri DTO'lara dönüştürür
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));               //IRepository ile karsılasırsan Repository classından nesne örneği al IRepository'e ata
             services.AddScoped(typeof(IService<>), typeof(Service.Services.Service<>));    //IService ile karsılasırsan Service classından nesne örneği al IService'e ata
@@ -42,8 +42,6 @@ namespace UdemyNLayerProject.Web
 
             services.AddControllersWithViews();
         }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

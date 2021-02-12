@@ -31,7 +31,7 @@ namespace UdemyNLayerProject.API.Filters
             {
                 ErrorDto errorDto = new ErrorDto();
                 errorDto.Status = 404;
-                errorDto.Errors.Add($"id'si {id} olan ürün veritabanında bulunamadı.");
+                errorDto.Errors.Add($"Product with id {id} not found in database!");
                 context.Result = new NotFoundObjectResult(errorDto);
             }
         }
