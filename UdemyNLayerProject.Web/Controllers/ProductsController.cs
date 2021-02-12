@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UdemyNLayerProject.Core.Models;
 using UdemyNLayerProject.Core.Services;
 using UdemyNLayerProject.Web.DTOS;
 
@@ -26,5 +27,30 @@ namespace UdemyNLayerProject.Web.Controllers
             var products = await _productService.GetAllAsync();
             return View(_mapper.Map<IEnumerable<ProductDto>>(products));
         }
+        public IActionResult Create()
+        {
+            //sayfa yüklendiğinde cağırılacak
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(ProductDto productDto)
+        {
+            var newProduct = await _productService.AddAsync(_mapper.Map<Product>(productDto));
+            return RedirectToAction("Index");
+        }
+        public async Task<IActionResult> Update(int id)
+        {
+            //sayfa yüklendiği an client'dan aldığım id'ye ait product bilgilerini alıyorum
+            var product = await _productService.GetByIdAsync(id);
+            return View(_mapper.Map<ProductDto>(product));
+        }
+        [HttpPost]
+        public IActionResult Update(ProductDto productDto)
+        {
+            _productService.Update(_mapper.Map<Product>(productDto));
+            return RedirectToAction("Index");
+        }
+
+
     }
 }
