@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UdemyNLayerProject.Core.Models;
 using UdemyNLayerProject.Core.Services;
+using UdemyNLayerProject.Web.ApiService;
 using UdemyNLayerProject.Web.DTOS;
 using UdemyNLayerProject.Web.Filters;
 
@@ -14,17 +15,20 @@ namespace UdemyNLayerProject.Web.Controllers
     {
         /// <summary>
         /// index sayfasında categorylerimi görüntülemek istiyorum
+        /// Web projesi, API ile haberleşiyor
         /// </summary>
         private readonly ICategoryService _categoryService;
+        private readonly CategoryApiService _categoryApiService;
         private readonly IMapper _mapper;
-        public CategoriesController(ICategoryService categoryService, IMapper mapper)
+        public CategoriesController(ICategoryService categoryService, IMapper mapper, CategoryApiService categoryApiService)
         {
             _categoryService = categoryService;
+            _categoryApiService = categoryApiService;
             _mapper = mapper;
         }
         public async Task<IActionResult> Index()
         {
-            var categories = await _categoryService.GetAllAsync();
+            var categories = await _categoryApiService.GetAllAsync();
             return View(_mapper.Map<IEnumerable<CategoryDto>>(categories));
         }
         public IActionResult Create()

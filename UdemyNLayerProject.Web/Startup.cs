@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 using UdemyNLayerProject.Core.Repositories;
 using UdemyNLayerProject.Core.Services;
 using UdemyNLayerProject.Core.UnitOfWorks;
@@ -11,6 +12,7 @@ using UdemyNLayerProject.Data;
 using UdemyNLayerProject.Data.Repositories;
 using UdemyNLayerProject.Data.UnitOfWorks;
 using UdemyNLayerProject.Service.Services;
+using UdemyNLayerProject.Web.ApiService;
 using UdemyNLayerProject.Web.Filters;
 
 namespace UdemyNLayerProject.Web
@@ -33,6 +35,7 @@ namespace UdemyNLayerProject.Web
             services.AddScoped<ICategoryService, CategoryServices>();                      //ICategoryService ile karsılasırsan CategoryServices classından nesne örneği al ICategoryService'e ata
             services.AddScoped<IProductService, ProductServices>();                        //IProductService ile karsılasırsan ProductServices classından nesne örneği al IProductService'e ata
             services.AddScoped<IUnitOfWork, UnitOfWork>();                                 //IUnitOfWork ile karsılasırsan UnitOfWork classından nesne örneği al IUnitOfWork'e ata
+            services.AddControllersWithViews();
             services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseSqlServer(Configuration["ConnectionStrings:SqlConStr"].ToString(), o =>
@@ -40,8 +43,11 @@ namespace UdemyNLayerProject.Web
                     o.MigrationsAssembly("UdemyNLayerProject.Data");
                 });
             });
-
-            services.AddControllersWithViews();
+            services.AddHttpClient<CategoryApiService>(opt=> 
+            {
+                opt.BaseAddress = new Uri(Configuration["baseUrl"]);                       //HttpClient nesnesi CategoryApiService ctorunda kullanılabilir, Endpointte baseUrl verdik
+            });
+            
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

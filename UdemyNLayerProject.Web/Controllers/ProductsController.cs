@@ -13,6 +13,7 @@ namespace UdemyNLayerProject.Web.Controllers
 {
     /// <summary>
     /// index sayfasında Productlarımı görüntülemek istiyorum.
+    /// Web projesi, API ile haberleşiyor
     /// </summary>
     public class ProductsController : Controller
     {
