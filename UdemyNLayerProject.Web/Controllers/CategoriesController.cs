@@ -39,7 +39,7 @@ namespace UdemyNLayerProject.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CategoryDto categoryDto)
         {
-            await _categoryService.AddAsync(_mapper.Map<Category>(categoryDto));
+            await _categoryApiService.AddAsync(categoryDto);
             return RedirectToAction("Index");
         }
         public async Task<IActionResult> Update(int id)
@@ -56,7 +56,7 @@ namespace UdemyNLayerProject.Web.Controllers
             return RedirectToAction("Index");
         }
 
-        [ServiceFilter(typeof(CategoryNotFoundFilter))]  //Filter içerisinde DI geçtiği için ServiceFilter ile tanımladık
+        [ServiceFilter(typeof(CategoryNotFoundFilter))]
         public IActionResult Delete(int id)
         {
             var category = _categoryService.GetByIdAsync(id).Result;
