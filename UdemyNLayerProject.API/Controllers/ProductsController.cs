@@ -24,6 +24,11 @@ namespace UdemyNLayerProject.API.Controllers
         private readonly IProductService _productService;
         private readonly IMapper _mapper;
 
+        /// <summary>
+        /// consturctor içerisinde servis bilgilerimi alıyorum
+        /// </summary>
+        /// <param name="productService"></param>
+        /// <param name="mapper"></param>
         public ProductsController(IProductService productService, IMapper mapper)
         {
             _productService = productService;

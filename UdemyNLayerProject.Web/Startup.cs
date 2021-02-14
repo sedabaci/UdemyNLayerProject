@@ -43,11 +43,11 @@ namespace UdemyNLayerProject.Web
                     o.MigrationsAssembly("UdemyNLayerProject.Data");
                 });
             });
-            services.AddHttpClient<CategoryApiService>(opt=> 
+            services.AddHttpClient<CategoryApiService>(opt =>
             {
                 opt.BaseAddress = new Uri(Configuration["baseUrl"]);                       //HttpClient nesnesi CategoryApiService ctorunda kullanılabilir, Endpointte baseUrl verdik
             });
-            
+
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

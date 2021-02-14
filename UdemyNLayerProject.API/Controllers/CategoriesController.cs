@@ -21,6 +21,11 @@ namespace UdemyNLayerProject.API.Controllers
     {
         private readonly ICategoryService _categoryService;
         private readonly IMapper _mapper;
+        /// <summary>
+        /// consturctor içerisinde servis bilgilerimi alıyorum
+        /// </summary>
+        /// <param name="categoryService"></param>
+        /// <param name="mapper"></param>
         public CategoriesController(ICategoryService categoryService, IMapper mapper)
         {
             _categoryService = categoryService;

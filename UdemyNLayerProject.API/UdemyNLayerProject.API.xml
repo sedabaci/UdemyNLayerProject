@@ -12,6 +12,13 @@
             HTPP Status 204:NoContent,
             </summary>
         </member>
+        <member name="M:UdemyNLayerProject.API.Controllers.CategoriesController.#ctor(UdemyNLayerProject.Core.Services.ICategoryService,AutoMapper.IMapper)">
+            <summary>
+            consturctor içerisinde servis bilgilerimi alıyorum
+            </summary>
+            <param name="categoryService"></param>
+            <param name="mapper"></param>
+        </member>
         <member name="M:UdemyNLayerProject.API.Controllers.CategoriesController.GetAll">
             <summary>
             Get all categories
@@ -73,6 +80,13 @@
             HTTP Status 201:Created,
             HTPP Status 204:NoContent,
             </summary>
+        </member>
+        <member name="M:UdemyNLayerProject.API.Controllers.ProductsController.#ctor(UdemyNLayerProject.Core.Services.IProductService,AutoMapper.IMapper)">
+            <summary>
+            consturctor içerisinde servis bilgilerimi alıyorum
+            </summary>
+            <param name="productService"></param>
+            <param name="mapper"></param>
         </member>
         <member name="M:UdemyNLayerProject.API.Controllers.ProductsController.GetAll">
             <summary>

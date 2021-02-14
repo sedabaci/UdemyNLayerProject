@@ -18,11 +18,11 @@ namespace UdemyNLayerProject.Web.ApiService
         {
             IEnumerable<CategoryDto> categoryDtos;
 
+
             var response = await _httpClient.GetAsync("categories");
 
             if (response.IsSuccessStatusCode)
             {
-                //json datayı CategoryDto ya convert ettik.
                 categoryDtos = JsonConvert.DeserializeObject<IEnumerable<CategoryDto>>(await response.Content.ReadAsStringAsync());
             }
             else
