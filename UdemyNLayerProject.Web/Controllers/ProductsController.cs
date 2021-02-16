@@ -57,10 +57,9 @@ namespace UdemyNLayerProject.Web.Controllers
         }
 
         [ServiceFilter(typeof(ProductNotFoundFilter))]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var product = _productService.GetByIdAsync(id).Result;
-            _productService.Remove(product);
+            await _productApiService.Remove(id);
             return RedirectToAction("Index");
         }
     }
