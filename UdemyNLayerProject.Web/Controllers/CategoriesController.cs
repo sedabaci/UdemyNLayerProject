@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using UdemyNLayerProject.Core.Models;
-using UdemyNLayerProject.Core.Services;
 using UdemyNLayerProject.Web.ApiService;
 using UdemyNLayerProject.Web.DTOS;
 using UdemyNLayerProject.Web.Filters;
@@ -17,12 +15,11 @@ namespace UdemyNLayerProject.Web.Controllers
         /// index sayfasında categorylerimi görüntülemek istiyorum
         /// Client, API ile haberleşiyor
         /// </summary>
-        private readonly ICategoryService _categoryService;
+        
         private readonly CategoryApiService _categoryApiService;
         private readonly IMapper _mapper;
-        public CategoriesController(ICategoryService categoryService, IMapper mapper, CategoryApiService categoryApiService)
+        public CategoriesController(IMapper mapper, CategoryApiService categoryApiService)
         {
-            _categoryService = categoryService;
             _categoryApiService = categoryApiService;
             _mapper = mapper;
         }

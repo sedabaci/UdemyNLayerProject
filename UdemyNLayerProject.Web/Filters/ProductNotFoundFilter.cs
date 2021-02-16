@@ -4,24 +4,24 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using UdemyNLayerProject.Core.Services;
+using UdemyNLayerProject.Web.ApiService;
 using UdemyNLayerProject.Web.DTOS;
 
 namespace UdemyNLayerProject.Web.Filters
 {
     public class ProductNotFoundFilter : ActionFilterAttribute
     {
-        private readonly IProductService _productService; 
+        private readonly ProductApiService productApiService; 
         //Filterımız dependency injection nesnesi alıyorsa, önce startup.cs içerisine addScoped olarak ekliyoruz.
-        public ProductNotFoundFilter(IProductService productService)
+        public ProductNotFoundFilter(ProductApiService productService)
         {
-            _productService = productService;
+            productApiService = productService;
         }
         public async override Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
             int id = (int)context.ActionArguments.Values.FirstOrDefault();
 
-            var product = await _productService.GetByIdAsync(id);
+            var product = await productApiService.GetByIdAsync(id);
 
             if (product != null)
             {

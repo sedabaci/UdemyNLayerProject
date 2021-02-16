@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using UdemyNLayerProject.Core.Models;
-using UdemyNLayerProject.Core.Services;
 using UdemyNLayerProject.Web.ApiService;
 using UdemyNLayerProject.Web.DTOS;
 using UdemyNLayerProject.Web.Filters;
@@ -18,12 +16,10 @@ namespace UdemyNLayerProject.Web.Controllers
     /// </summary>
     public class ProductsController : Controller
     {
-        private readonly IProductService _productService;
         private readonly ProductApiService _productApiService;
         private readonly IMapper _mapper;
-        public ProductsController(IProductService productService, IMapper mapper, ProductApiService productApiService)
+        public ProductsController(IMapper mapper, ProductApiService productApiService)
         {
-            _productService = productService;
             _productApiService = productApiService;
             _mapper = mapper;
         }

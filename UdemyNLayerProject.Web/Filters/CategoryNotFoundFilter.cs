@@ -2,23 +2,23 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Linq;
 using System.Threading.Tasks;
-using UdemyNLayerProject.Core.Services;
+using UdemyNLayerProject.Web.ApiService;
 using UdemyNLayerProject.Web.DTOS;
 
 namespace UdemyNLayerProject.Web.Filters
 {
     public class CategoryNotFoundFilter : ActionFilterAttribute
     {
-        private readonly ICategoryService _categoryService;
-        public CategoryNotFoundFilter(ICategoryService categoryService)
+        private readonly CategoryApiService _categoryApiService;
+        public CategoryNotFoundFilter(CategoryApiService categoryService)
         {
-            _categoryService = categoryService;
+            _categoryApiService = categoryService;
         }
         public async override Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
             int id = (int)context.ActionArguments.Values.FirstOrDefault();
 
-            var category = await _categoryService.GetByIdAsync(id);
+            var category = await _categoryApiService.GetByIdAsync(id);
 
             if (category != null)
             {

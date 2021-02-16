@@ -1,17 +1,9 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using UdemyNLayerProject.Core.Repositories;
-using UdemyNLayerProject.Core.Services;
-using UdemyNLayerProject.Core.UnitOfWorks;
-using UdemyNLayerProject.Data;
-using UdemyNLayerProject.Data.Repositories;
-using UdemyNLayerProject.Data.UnitOfWorks;
-using UdemyNLayerProject.Service.Services;
 using UdemyNLayerProject.Web.ApiService;
 using UdemyNLayerProject.Web.Filters;
 
@@ -30,19 +22,6 @@ namespace UdemyNLayerProject.Web
             services.AddScoped(typeof(ProductNotFoundFilter));                             //Filter içnerisinde interface tanımlandığı için(DI) önce buraya kaydettik.
             services.AddScoped(typeof(CategoryNotFoundFilter));                            //Filter içnerisinde interface tanımlandığı için(DI) önce buraya kaydettik.
             services.AddAutoMapper(typeof(Startup));                                       //Entityleri DTO'lara dönüştürür
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));               //IRepository ile karsılasırsan Repository classından nesne örneği al IRepository'e ata
-            services.AddScoped(typeof(IService<>), typeof(Service.Services.Service<>));    //IService ile karsılasırsan Service classından nesne örneği al IService'e ata
-            services.AddScoped<ICategoryService, CategoryServices>();                      //ICategoryService ile karsılasırsan CategoryServices classından nesne örneği al ICategoryService'e ata
-            services.AddScoped<IProductService, ProductServices>();                        //IProductService ile karsılasırsan ProductServices classından nesne örneği al IProductService'e ata
-            services.AddScoped<IUnitOfWork, UnitOfWork>();                                 //IUnitOfWork ile karsılasırsan UnitOfWork classından nesne örneği al IUnitOfWork'e ata
-            services.AddControllersWithViews();
-            services.AddDbContext<AppDbContext>(options =>
-            {
-                options.UseSqlServer(Configuration["ConnectionStrings:SqlConStr"].ToString(), o =>
-                {
-                    o.MigrationsAssembly("UdemyNLayerProject.Data");
-                });
-            });
             services.AddHttpClient<CategoryApiService>(opt =>
             {
                 opt.BaseAddress = new Uri(Configuration["baseUrl"]);                       //HttpClient nesnesi CategoryApiService ctorunda kullanılabilir, Endpointte baseUrl verdik
