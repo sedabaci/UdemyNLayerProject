@@ -46,13 +46,13 @@ namespace UdemyNLayerProject.Web.Controllers
         public async Task<IActionResult> Update(int id)
         {
             //sayfa yüklendiği an client'dan aldığım id'ye ait product bilgilerini alıyorum
-            var product = await _productService.GetByIdAsync(id);
+            var product = await _productApiService.GetByIdAsync(id);
             return View(_mapper.Map<ProductDto>(product));
         }
         [HttpPost]
-        public IActionResult Update(ProductDto productDto)
+        public async Task<IActionResult> Update(ProductDto productDto)
         {
-            _productService.Update(_mapper.Map<Product>(productDto));
+            await _productApiService.Update(productDto);
             return RedirectToAction("Index");
         }
 

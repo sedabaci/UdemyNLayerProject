@@ -47,6 +47,34 @@ namespace UdemyNLayerProject.Web.ApiService
                 return null;
             }            
         }
+        public async Task<ProductDto> GetByIdAsync(int id)
+        {
+            var response = await _httpClient.GetAsync($"products/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<ProductDto>(await response.Content.ReadAsStringAsync());
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public async Task<bool> Update (ProductDto productDto)
+        {
+            var stringContent = new StringContent(JsonConvert.SerializeObject(productDto), Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.PutAsync("products", stringContent);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
 
 
     }
