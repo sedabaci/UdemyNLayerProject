@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using UdemyNLayerProject.Core.Models;
 using UdemyNLayerProject.Core.Services;
+using UdemyNLayerProject.Web.ApiService;
 using UdemyNLayerProject.Web.DTOS;
 using UdemyNLayerProject.Web.Filters;
 
@@ -13,20 +14,22 @@ namespace UdemyNLayerProject.Web.Controllers
 {
     /// <summary>
     /// index sayfasında Productlarımı görüntülemek istiyorum.
-    /// Web projesi, API ile haberleşiyor
+    /// Client, API ile haberleşiyor
     /// </summary>
     public class ProductsController : Controller
     {
         private readonly IProductService _productService;
+        private readonly ProductApiService _productApiService;
         private readonly IMapper _mapper;
-        public ProductsController(IProductService productService, IMapper mapper)
+        public ProductsController(IProductService productService, IMapper mapper, ProductApiService productApiService)
         {
             _productService = productService;
+            _productApiService = productApiService;
             _mapper = mapper;
         }
         public async Task<IActionResult> Index()
         {
-            var products = await _productService.GetAllAsync();
+            var products = await _productApiService.GetAllAsync();
             return View(_mapper.Map<IEnumerable<ProductDto>>(products));
         }
         public IActionResult Create()
@@ -37,7 +40,7 @@ namespace UdemyNLayerProject.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(ProductDto productDto)
         {
-            var newProduct = await _productService.AddAsync(_mapper.Map<Product>(productDto));
+            await _productApiService.AddAsync(productDto);
             return RedirectToAction("Index");
         }
         public async Task<IActionResult> Update(int id)

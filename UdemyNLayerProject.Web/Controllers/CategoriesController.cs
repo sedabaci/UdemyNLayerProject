@@ -15,7 +15,7 @@ namespace UdemyNLayerProject.Web.Controllers
     {
         /// <summary>
         /// index sayfasında categorylerimi görüntülemek istiyorum
-        /// Web projesi, API ile haberleşiyor
+        /// Client, API ile haberleşiyor
         /// </summary>
         private readonly ICategoryService _categoryService;
         private readonly CategoryApiService _categoryApiService;

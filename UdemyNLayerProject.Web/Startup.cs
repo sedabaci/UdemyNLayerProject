@@ -47,6 +47,10 @@ namespace UdemyNLayerProject.Web
             {
                 opt.BaseAddress = new Uri(Configuration["baseUrl"]);                       //HttpClient nesnesi CategoryApiService ctorunda kullanılabilir, Endpointte baseUrl verdik
             });
+            services.AddHttpClient<ProductApiService>(opt =>
+            {
+                opt.BaseAddress = new Uri(Configuration["baseUrl"]);
+            });
 
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

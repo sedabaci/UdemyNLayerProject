@@ -82,10 +82,10 @@ namespace UdemyNLayerProject.API.Controllers
         public async Task<IActionResult> Save(ProductDto productDto)
         {
             #region BestPracticeUygunDegil_SaveProductDto_olusturulabilir
-            if (string.IsNullOrEmpty(productDto.Id.ToString()) || productDto.Id <= 0)
-            {
-                throw new Exception("Id alanı gereklidir!");
-            }
+            //if (string.IsNullOrEmpty(productDto.Id.ToString()) || productDto.Id <= 0)
+            //{
+            //    throw new Exception("Id alanı gereklidir!");
+            //}
             #endregion BestPracticeUygunDegil_SaveProductDto_olusturulabilir
 
             var newProduct = await _productService.AddAsync(_mapper.Map<Product>(productDto));
